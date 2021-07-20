@@ -1,15 +1,16 @@
 class Workout
     attr_accessor :sport, :type, :description, :minutes
 
-    def initialize(sport: "", type: "", description: "", minutes: 0)
-        @sport = sport
-        @type = type
-        @description = description
-        @minutes = minutes
+    def initialize(params = {})
+        @sport = params.fetch(:sport, "")
+        @type = params.fetch(:type, "")
+        @description = params.fetch(:description, "")
+        @minutes = params.fetch(:minutes, 0)
     end
 
     def inspect
-        "WO: #{@sport}, #{@type}, #{@minutes})"
+        #"WO: #{@sport}, #{@type}, #{@minutes})"
+        "#{@sport}\t#{@type}\t#{@minutes}"
     end
 
 end
@@ -17,9 +18,9 @@ end
 class WorkoutDay
     attr_accessor :dayOfWeek, :workouts
 
-    def initialize(dayOfWeek: "UNDEFINED", workouts: [])
-        @dayOfWeek = dayOfWeek
-        @workouts = workouts
+    def initialize(params = {})
+        @dayOfWeek = params.fetch(:dayOfWeek, "UNDEFINED")
+        @workouts = params.fetch(:workouts, [])
     end
 
     def addWorkout(workout)
@@ -33,7 +34,9 @@ class WorkoutDay
     end
 
     def inspect
-        "WOD: #{@dayOfWeek}, #{totalMinutes}, \n#{@workouts})"
+        #"WOD: #{@dayOfWeek}, #{totalMinutes}, \n#{@workouts})"
+        "\n|#{@dayOfWeek}:#{totalMinutes}|" +
+        "#{@workouts}\n"
     end
 
 end
@@ -41,10 +44,10 @@ end
 class WorkoutWeek
     attr_accessor :weekNumber, :type, :days
   
-    def initialize(weekNumber: 0, type: "", days: [])
-        @weekNumber = weekNumber
-        @type = type
-        @days = days
+    def initialize(params = {})
+        @weekNumber = params.fetch(:weekNumber, 0)
+        @type = params.fetch(:type, "")
+        @days = params.fetch(:days, [])
     end
 
     def addDay(workoutDay)
@@ -62,7 +65,9 @@ class WorkoutWeek
     end
 
     def inspect
-        "\nWOW: #{@weekNumber}, #{@type}, #{totalMinutes})\n,days: \n#{@days}"
+        "#{@weekNumber}:#{@type}:#{totalMinutes}\n------------------------------\n"+
+        "#{@days.inspect}"+
+        "\n------------------------------\n"
     end
 end
 
@@ -70,54 +75,23 @@ class WorkoutPlan
     attr_accessor :planLength, :startMinutes, :blockSize, :buildFactor, :recoveryFactor, :maxTime, :startDate
     attr_reader :plan
 
-    def initialize(planLength: 12, blockSize: 4, buildFactor: 1.2, recoveryFactor: 0.85, 
-        minMinutes: 240, maxMinutes: 600, startDate: "", startMinutes: 240)
+    def initialize(params = {})
         @plan = []
-        @planLength = planLength
-        @startMinutes = startMinutes
-        @buildFactor = buildFactor
-        @recoveryFactor = recoveryFactor
-        @minMinutes = minMinutes
-        @maxMinutes = maxMinutes
-        @blockSize = blockSize
+        @planLength = params.fetch(:planLength, 12)
+        @startMinutes = params.fetch(:startMinutes, 240)
+        @buildFactor = params.fetch(:buildFactor, 1.2)
+        @recoveryFactor = params.fetch(:recoveryFactor, 0.85)
+        @minMinutes = params.fetch(:minMinutes, 240)
+        @maxMinutes = params.fetch(:maxMinutes, 600)
+        @blockSize = params.fetch(:blockSize, 4)
     end
     
     def generate
 
-        @minutes = @startMinutes
-        (1..@planLength).each { |i|
-        
-            ww = WorkoutWeek.new(weekNumber: i)
-            monday = WorkoutDay.new(dayOfWeek: "MONDAY")
-            monday.addWorkout(Workout.new(type: "REST", description: "rest day", minutes: 0))
-            ww.addDay(monday)
-            tuesday = WorkoutDay.new(dayOfWeek: "TUESDAY")
-            tuesday.addWorkout(Workout.new(type: "RUN", description: "aerobic day", minutes: (@minutes * 0.1).round(0)))
-            ww.addDay(tuesday)
-            wednesday = WorkoutDay.new(dayOfWeek: "WEDNESDAY")
-            wednesday.addWorkout(Workout.new(type: "RUN", description: "workout day", minutes: (@minutes * 0.2).round(0)))
-            ww.addDay(wednesday)
-            thursday = WorkoutDay.new(dayOfWeek: "THURSDAY")
-            thursday.addWorkout(Workout.new(type: "RUN", description: "workout day", minutes: (@minutes * 0.1).round(0)))
-            ww.addDay(thursday)
-            friday = WorkoutDay.new(dayOfWeek: "FRIDAY")
-            friday.addWorkout(Workout.new(type: "RUN", description: "workout day", minutes: (@minutes * 0.2).round(0)))
-            ww.addDay(friday)
-            saturday = WorkoutDay.new(dayOfWeek: "SATURDAY")
-            saturday.addWorkout(Workout.new(type: "RUN", description: "workout day", minutes: (@minutes * 0.1).round(0)))
-            ww.addDay(saturday)
-            sunday = WorkoutDay.new(dayOfWeek: "SUNDAY")
-            sunday.addWorkout(Workout.new(type: "RUN", description: "workout day", minutes: (@minutes * 0.3).round(0)))
-            ww.addDay(sunday)
-            @plan.push(ww)
-
-            calculateFactor(i)
-        }
     end
 
     def calculateFactor(weekNum) 
-        puts @blockSize
-        if weekNum > 1
+        #if weekNum > 1
             if weekNum % @blockSize == 0
                 @minutes = @minutes * @recoveryFactor
                 if @minutes < @minMinutes
@@ -129,7 +103,7 @@ class WorkoutPlan
                     @minutes = @maxMinutes
                 end
             end
-        end
+        #end
 
     end
 
@@ -144,10 +118,92 @@ class WorkoutPlan
     end
 
     def inspect
-        "Workout Plan: \n
-        Plan Length: #{@planLength}"
+        "\nWORKOUT PLAN\n"
+        describe
     
     end
 
+end
 
+class BryanWorkoutPlan < WorkoutPlan
+
+    def initialize(params = {})
+        super(params)
+    end
+
+    def generate
+
+        @minutes = @startMinutes
+        (1..@planLength).each { |i|
+        
+            ww = WorkoutWeek.new(weekNumber: i)
+            monday = WorkoutDay.new(dayOfWeek: "MON")
+            monday.addWorkout(Workout.new(type: "REST", description: "d", minutes: 0))
+            ww.addDay(monday)
+            tuesday = WorkoutDay.new(dayOfWeek: "TUE")
+            tuesday.addWorkout(Workout.new(type: "STRIDES", description: "d", minutes: (@minutes * 0.1).round(0)))
+            ww.addDay(tuesday)
+            wednesday = WorkoutDay.new(dayOfWeek: "WED")
+            wednesday.addWorkout(Workout.new(type: "HILLS", description: "d", minutes: (@minutes * 0.2).round(0)))
+            ww.addDay(wednesday)
+            thursday = WorkoutDay.new(dayOfWeek: "THU")
+            thursday.addWorkout(Workout.new(type: "EASY", description: "d", minutes: (@minutes * 0.1).round(0)))
+            ww.addDay(thursday)
+            friday = WorkoutDay.new(dayOfWeek: "FRI")
+            friday.addWorkout(Workout.new(type: "STRIDES", description: "d", minutes: (@minutes * 0.2).round(0)))
+            ww.addDay(friday)
+            saturday = WorkoutDay.new(dayOfWeek: "SAT")
+            saturday.addWorkout(Workout.new(type: "EASY", description: "d", minutes: (@minutes * 0.1).round(0)))
+            ww.addDay(saturday)
+            sunday = WorkoutDay.new(dayOfWeek: "SUN")
+            sunday.addWorkout(Workout.new(type: "LONG", description: "d", minutes: (@minutes * 0.3).round(0)))
+            ww.addDay(sunday)
+            @plan.push(ww)
+
+            calculateFactor(i)
+        }
+    end
+
+end
+
+class RocheWorkoutPlan < WorkoutPlan
+
+    def initialize(params = {})
+        super(params)
+    end
+
+    def generate
+
+        @minutes = @startMinutes
+        (1..@planLength).each { |i|
+        
+            ww = WorkoutWeek.new(weekNumber: i)
+            monday = WorkoutDay.new(dayOfWeek: "MON")
+            monday.addWorkout(Workout.new(sport: "REST", type: "REST", description: "rest day", minutes: 0))
+            ww.addDay(monday)
+            tuesday = WorkoutDay.new(dayOfWeek: "TUE")
+            tuesday.addWorkout(Workout.new(sport: "RUN", type: "STRIDES", description: "8x20s strides on 2:00", minutes: (@minutes * 0.15).round(0)))
+            ww.addDay(tuesday)
+            wednesday = WorkoutDay.new(dayOfWeek: "WED")
+            wednesday.addWorkout(Workout.new(sport: "RUN", type: "HILLS", description: "Hill repeats 8 x 30s", minutes: (@minutes * 0.2).round(0)))
+            ww.addDay(wednesday)
+            thursday = WorkoutDay.new(dayOfWeek: "THU")
+            thursday.addWorkout(Workout.new(sport: "RUN", type: "EASY", description: "easy zone 1", minutes: (@minutes * 0.15).round(0)))
+            ww.addDay(thursday)
+            friday = WorkoutDay.new(dayOfWeek: "FRI")
+            friday.addWorkout(Workout.new(sport: "REST", type: "REST", description: "rest day", minutes: (@minutes * 0).round(0)))
+            ww.addDay(friday)
+            saturday = WorkoutDay.new(dayOfWeek: "SAT")
+            saturday.addWorkout(Workout.new(sport: "RUN", type: "LONG", description: "long and easy", minutes: (@minutes * 0.35).round(0)))
+            ww.addDay(saturday)
+            sunday = WorkoutDay.new(dayOfWeek: "SUN")
+            sunday.addWorkout(Workout.new(sport: "RUN", type: "STRIDES", description: "5 x 1:00 on 2:00", minutes: (@minutes * 0.15).round(0)))
+            ww.addDay(sunday)
+            @plan.push(ww)
+
+            calculateFactor(i)
+        }
+    end
+
+    
 end

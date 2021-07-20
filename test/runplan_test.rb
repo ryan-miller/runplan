@@ -62,17 +62,32 @@ class WorkoutWeekTest < Minitest::Test
 
 end
 
-class WorkoutPlanTest < Minitest::Test
-    def test_basic_workout_plan
-        wp = WorkoutPlan.new
+class BryanPlanTest < Minitest::Test
+    def test_basic_bryan_workout_plan
+        wp = BryanWorkoutPlan.new
         wp.generate
-        expected = [[],[],[],[],[],[],[],[],[],[],[],[]]
-        assert_equal expected, wp.plan
+        expected = 12
+        assert_equal expected, wp.plan.length
     end
-    def test_3_week_workout_plan
-        wp = WorkoutPlan.new(planLength: 3)
+    def test_3_week_bryan_workout_plan
+        wp = BryanWorkoutPlan.new(planLength: 3)
         wp.generate
-        expected = [[],[],[]]
-        assert_equal expected, wp.plan
+        expected = 3
+        assert_equal expected, wp.plan.length
+    end
+end
+
+class RochePlanTest < Minitest::Test
+    def test_basic_roche_workout_plan
+        wp = BryanWorkoutPlan.new
+        wp.generate
+        expected = 12
+        assert_equal expected, wp.plan.length
+    end
+    def test_3_week_roche_workout_plan
+        wp = BryanWorkoutPlan.new(planLength: 3)
+        wp.generate
+        expected = 3
+        assert_equal expected, wp.plan.length
     end
 end

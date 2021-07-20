@@ -15,10 +15,19 @@ workoutWeek = WorkoutWeek.new(weekNumber: 2, type: "BUILD")
 workoutWeek.addDay(firstDay)
 workoutWeek.addDay(secondDay)
 
-puts "firstWorkout: #{firstWorkout.inspect}"
-puts "secondWorkout: #{secondWorkout.inspect}"
-puts "firstDay: #{firstDay.inspect}"
-puts "secondDay: #{secondDay.inspect}"
-puts "workoutWeek: #{workoutWeek.inspect}"
+# puts "firstWorkout: #{firstWorkout.inspect}"
+# puts "secondWorkout: #{secondWorkout.inspect}"
+# puts "firstDay: #{firstDay.inspect}"
+# puts "secondDay: #{secondDay.inspect}"
+# puts "workoutWeek: #{workoutWeek.inspect}"
 
-puts "total minutes: #{workoutWeek.totalMinutes}"
+# puts "total minutes: #{workoutWeek.totalMinutes}"
+
+
+bwp = BryanWorkoutPlan.new(planLength: 4)
+bwp.generate
+puts bwp.plan.to_s
+
+# rwp = RocheWorkoutPlan.new(planLength: 4)
+# rwp.generate
+# puts rwp.plan.to_s
