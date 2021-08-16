@@ -1,6 +1,24 @@
 require 'json'
 
-class Workout
+class Serializeable
+    def to_json
+        hash = {}
+
+        self.instance_variables.each do |var|
+            hash[var] = self.instance_variable_get var
+        end
+        
+        hash.to_json
+    end
+
+    def from_json! string
+        JSON.load(string).each do |var, val|
+            self.instance_variable_set var, val
+        end
+    end
+end
+
+class Workout < Serializeable
     attr_accessor :sport, :type, :description, :minutes
 
     def initialize(params = {})
@@ -9,19 +27,10 @@ class Workout
         @description = params.fetch(:description, "")
         @minutes = params.fetch(:minutes, 0)
     end
-    
-    def to_json
-        {'sport' => @sport, 'type' => @type, 'description' => @description, 'minutes' => @minutes}.to_json
-    end
-
-    def self.from_json string
-        data = JSON.load string
-        self.new data['sport'], data['type'], data['description'], data['minutes']
-    end
 
 end
 
-class WorkoutDay
+class WorkoutDay < Serializeable
     attr_accessor :dayOfWeek, :workouts
 
     def initialize(params = {})
@@ -39,14 +48,9 @@ class WorkoutDay
         sum
     end
 
-    def inspect
-        "\n|#{@dayOfWeek}:#{totalMinutes}|" +
-        "#{@workouts}\n"
-    end
-
 end
 
-class WorkoutWeek
+class WorkoutWeek < Serializeable
     attr_accessor :weekNumber, :type, :days
   
     def initialize(params = {})
@@ -69,14 +73,9 @@ class WorkoutWeek
         sum
     end
 
-    def inspect
-        "#{@weekNumber}:#{@type}:#{totalMinutes}\n------------------------------\n"+
-        "#{@days.inspect}"+
-        "\n------------------------------\n"
-    end
 end
 
-class WorkoutPlan
+class WorkoutPlan < Serializeable
     attr_accessor :planLength, :startMinutes, :blockSize, :buildFactor, :recoveryFactor, :maxTime, :startDate
     attr_reader :plan
 
@@ -116,16 +115,6 @@ class WorkoutPlan
         t = 0.0
         @plan.at(weekNum).each { |a| t+=a }
         return t.round(0)
-    end
-
-    def describe
-        puts @plan.to_s
-    end
-
-    def inspect
-        "\nWORKOUT PLAN\n"
-        describe
-    
     end
 
 end
