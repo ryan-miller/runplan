@@ -1,3 +1,5 @@
+require 'json'
+
 class Workout
     attr_accessor :sport, :type, :description, :minutes
 
@@ -7,10 +9,14 @@ class Workout
         @description = params.fetch(:description, "")
         @minutes = params.fetch(:minutes, 0)
     end
+    
+    def to_json
+        {'sport' => @sport, 'type' => @type, 'description' => @description, 'minutes' => @minutes}.to_json
+    end
 
-    def inspect
-        #"WO: #{@sport}, #{@type}, #{@minutes})"
-        "#{@sport}\t#{@type}\t#{@minutes}"
+    def self.from_json string
+        data = JSON.load string
+        self.new data['sport'], data['type'], data['description'], data['minutes']
     end
 
 end
@@ -34,7 +40,6 @@ class WorkoutDay
     end
 
     def inspect
-        #"WOD: #{@dayOfWeek}, #{totalMinutes}, \n#{@workouts})"
         "\n|#{@dayOfWeek}:#{totalMinutes}|" +
         "#{@workouts}\n"
     end
