@@ -1,7 +1,7 @@
 require 'json'
 
 class Serializeable
-    def to_json
+    def to_json(options={})
         hash = {}
 
         self.instance_variables.each do |var|
@@ -115,6 +115,10 @@ class WorkoutPlan < Serializeable
         t = 0.0
         @plan.at(weekNum).each { |a| t+=a }
         return t.round(0)
+    end
+
+    def pretty_print
+        "hello"
     end
 
 end

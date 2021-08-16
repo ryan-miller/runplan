@@ -16,18 +16,18 @@ workoutWeek = WorkoutWeek.new(weekNumber: 2, type: "BUILD")
 workoutWeek.addDay(firstDay)
 workoutWeek.addDay(secondDay)
 
-puts "firstWorkout: #{firstWorkout.to_json}"
-puts "secondWorkout: #{secondWorkout.to_json}"
-puts "firstDay: #{firstDay.to_json}"
+# puts "firstWorkout: #{firstWorkout.to_json}"
+# puts "secondWorkout: #{secondWorkout.to_json}"
+# puts "firstDay: #{firstDay.to_json}"
 # puts "secondDay: #{secondDay.to_json}"
-#puts "workoutWeek: #{workoutWeek.to_json}"
+# puts "workoutWeek: #{workoutWeek.to_json}"
 
-puts "total minutes: #{workoutWeek.totalMinutes}"
+# puts "total minutes: #{workoutWeek.totalMinutes}"
 
 
-# bwp = RocheWorkoutPlan.new(planLength: 4, startMinutes: 300)
-# bwp.generate
-# puts bwp.plan.to_s
+bwp = RocheWorkoutPlan.new(planLength: 4, startMinutes: 300)
+bwp.generate
+puts bwp.pretty_print
 
 # rwp = RocheWorkoutPlan.new(planLength: 4, startMinutes: 300)
 # rwp.generate
