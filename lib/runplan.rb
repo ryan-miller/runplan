@@ -5,7 +5,8 @@ class Serializeable
         hash = {}
 
         self.instance_variables.each do |var|
-            hash[var] = self.instance_variable_get var
+            var_string = var.to_s.sub "@",""
+            hash[var_string] = self.instance_variable_get var
         end
         
         hash.to_json
@@ -44,7 +45,7 @@ class WorkoutDay < Serializeable
 
     def totalMinutes
         sum = 0
-        @workouts.each { |workout| sum += workout.minutes }
+        workouts.each { |workout| sum += workout.minutes }
         sum
     end
 
@@ -77,7 +78,7 @@ end
 
 class WorkoutPlan < Serializeable
     attr_accessor :planLength, :startMinutes, :blockSize, :buildFactor, :recoveryFactor, :maxTime, :startDate
-    attr_reader :plan
+    attr_reader :plan, :planName
 
     def initialize(params = {})
         @plan = []
@@ -118,7 +119,12 @@ class WorkoutPlan < Serializeable
     end
 
     def pretty_print
-        "hello"
+
+        output = "W D M T W T F S S\n"
+        output += "----------------\n"
+        output += "#{plan[0].to_json}\n\n" 
+        output += "#{plan[1].to_json}\n"
+
     end
 
 end
@@ -168,6 +174,7 @@ class RocheWorkoutPlan < WorkoutPlan
 
     def initialize(params = {})
         super(params)
+        planName = "ROCHE"
     end
 
     def generate
