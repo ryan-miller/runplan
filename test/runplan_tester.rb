@@ -4,7 +4,6 @@ firstWorkout = Workout.new(sport: "RUN", type: "AEROBIC", description: "some run
 secondWorkout = Workout.new(sport: "RUN", type: "WORKOUT", description: "some running2", minutes: 120)
 thirdWorkout = Workout.new(sport: "RUN", type: "AEROBIC", description: "some running3", minutes: 180)
 
-
 firstDay = WorkoutDay.new(dayOfWeek: "MONDAY")
 secondDay = WorkoutDay.new(dayOfWeek: "TUESDAY")
 
@@ -16,19 +15,12 @@ workoutWeek = WorkoutWeek.new(weekNumber: 2, type: "BUILD")
 workoutWeek.addDay(firstDay)
 workoutWeek.addDay(secondDay)
 
-# puts "firstWorkout: #{firstWorkout.to_json}"
-# puts "secondWorkout: #{secondWorkout.to_json}"
-# puts "firstDay: #{firstDay.to_json}"
-# puts "secondDay: #{secondDay.to_json}"
-# puts "workoutWeek: #{workoutWeek.to_json}"
+params = {:planLength => 12, :startMinutes => 300}
 
-# puts "total minutes: #{workoutWeek.totalMinutes}"
-
-
-bwp = RocheWorkoutPlan.new(planLength: 4, startMinutes: 300)
+bwp = BryanWorkoutPlan.new(params)
 bwp.generate
 puts bwp.pretty_print
 
-# rwp = RocheWorkoutPlan.new(planLength: 4, startMinutes: 300)
-# rwp.generate
-# puts rwp.plan.to_s
+rwp = RocheWorkoutPlan.new(params)
+rwp.generate
+puts rwp.pretty_print

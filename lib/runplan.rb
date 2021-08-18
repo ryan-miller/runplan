@@ -132,13 +132,14 @@ class WorkoutPlan < Serializeable
     end
 
     def pretty_print
-        output = "W\tD\tM\tT\tW\tT\tF\tS\tS\n"
+        output = "W\tD\tM\tT\tW\tT\tF\tS\tS\tT\n"
         plan.each do |week|
             output += "#{week.weekNumber}\t"
             output += "#{week.type}\t"
             (0..6).each do |dayNum|
                 output += "#{week.days[dayNum].workouts[0].minutes.pretty_duration}\t"
             end
+            output += "#{week.totalMinutes.pretty_duration}"
             output += "\n"
         end
         output += "\n"
