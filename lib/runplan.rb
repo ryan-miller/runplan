@@ -1,5 +1,18 @@
 require 'json'
 
+class Integer
+    def pretty_duration
+        parse_string = 
+            if self < 3600
+                '%M:%S'
+            else
+                '%H:%M:%S'
+            end
+
+        Time.at(self).utc.strftime(parse_string)
+    end
+end
+
 class Serializeable
     def to_json(options={})
         hash = {}
@@ -119,12 +132,24 @@ class WorkoutPlan < Serializeable
     end
 
     def pretty_print
-
-        output = "W D M T W T F S S\n"
-        output += "----------------\n"
-        output += "#{plan[0].to_json}\n\n" 
-        output += "#{plan[1].to_json}\n"
-
+        output = "W\tD\tM\tT\tW\tT\tF\tS\tS\n"
+        plan.each do |week|
+            output += "#{week.weekNumber}\t"
+            output += "#{week.type}\t"
+            (0..6).each do |dayNum|
+                output += "#{week.days[dayNum].workouts[0].minutes.pretty_duration}\t"
+            end
+            output += "\n"
+        end
+        output += "\n"
+        output += "R = rest\n"
+        output += "W = workout\n"
+        output += "E = easy\n"
+        output += "S = strides\n"
+        output += "L = long\n"
+        output += "F = fast finish\n"
+        output += "T = tempo\n"
+       output 
     end
 
 end

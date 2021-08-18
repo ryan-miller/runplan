@@ -1,7 +1,7 @@
 require_relative '../lib/runplan'
 
 firstWorkout = Workout.new(sport: "RUN", type: "AEROBIC", description: "some running1", minutes: 60)
-secondWorkout = Workout.new(sport: "RUN", type: "AEROBIC", description: "some running2", minutes: 120)
+secondWorkout = Workout.new(sport: "RUN", type: "WORKOUT", description: "some running2", minutes: 120)
 thirdWorkout = Workout.new(sport: "RUN", type: "AEROBIC", description: "some running3", minutes: 180)
 
 
