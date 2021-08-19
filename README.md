@@ -33,7 +33,7 @@ Many workout plans have a number of assumptions. Runplan allows for several runt
 Runplan provides two different run plan strategies. We will refer to them as the 'Frank' strategy and the 'Roche' strategy.
 
 ## Frank Strategy
-The Frank strategy (which will probably change once I remember the correct name) is based off of a forum.slowtwitch.com member. This approach is to run six days a week. There are three short runs, 2 medium runs, and 1 long run where the medium runs are two times as long as the short runs and the long run is three times as long as the short runs. For instance, with easy math, if you run ten hours a week, you would do three 1 hour runs, two 2 hour runs, and one 3 hour run. By default, for now, the single rest day each week is on Monday.
+The Frank strategy (which will probably change once I remember the correct name) is based off of a http://forum.slowtwitch.com member. This approach is to run six days a week. There are three short runs, 2 medium runs, and 1 long run where the medium runs are two times as long as the short runs and the long run is three times as long as the short runs. For instance, with easy math, if you run ten hours a week, you would do three 1 hour runs, two 2 hour runs, and one 3 hour run. By default, for now, the single rest day each week is on Monday.
 
 ## ROCHE Strategy
 The Roche strategy is from SWAP Running (www.swaprunning.com) coaches, David and Megan Roche. Their strategy is bit more complex. See below for a typical week.
