@@ -9,6 +9,7 @@ Ruby 3
 
 ## Usage
 ```ruby runplan.rb```
+
 ```ruby runplan.rb -min 240 -max 600```
 ```...```
 
