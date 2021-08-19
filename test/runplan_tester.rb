@@ -15,12 +15,14 @@ workoutWeek = WorkoutWeek.new(weekNumber: 2, type: "BUILD")
 workoutWeek.addDay(firstDay)
 workoutWeek.addDay(secondDay)
 
-params = {:planLength => 12, :startMinutes => 300}
+params = {:planLength => 4, :startMinutes => 240}
 
-bwp = BryanWorkoutPlan.new(params)
-bwp.generate
-puts bwp.pretty_print
+fwp = FrankWorkoutPlan.new(params)
+fwp.generate
+puts "FRANK PLAN\n"
+puts fwp.pretty_print
 
 rwp = RocheWorkoutPlan.new(params)
 rwp.generate
+puts "ROCHE PLAN\n"
 puts rwp.pretty_print
