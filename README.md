@@ -56,10 +56,10 @@ Running `ruby test/runplan_tester.rb` using default values results in the below 
 |FRANK PLAN||||||||||
 |---|---|---|---|---|---|---|---|---|---|
 |W|       D|      M|       T|       W|       T|       F|       S|       S|       T|
-|1||00:00R|00:24S|00:48W|00:24E|00:48T|00:24E|01:12L|04:00|
-|2||00:00R|00:29S|00:58W|00:29E|00:58T|00:29E|01:26L|04:49|
-|3||00:00R|00:35S|01:09W|00:35E|01:09T|00:35E|01:44L|05:47|
-|4||00:00R|00:41S|01:23W|00:41E|01:23T|00:41E|02:04L|06:53|
+|1|08/02/2021|00:00R|00:24S|00:48W|00:24E|00:48T|00:24E|01:12L|04:00|
+|2|08/09/2021|00:00R|00:29S|00:58W|00:29E|00:58T|00:29E|01:26L|04:49|
+|3|08/16/2021|00:00R|00:35S|01:09W|00:35E|01:09T|00:35E|01:44L|05:47|
+|4|08/23/2021|00:00R|00:41S|01:23W|00:41E|01:23T|00:41E|02:04L|06:53|
 
 R = rest,
 W = workout,
@@ -73,10 +73,10 @@ T = tempo
 |ROCHE PLAN||||||||||
 |---|---|---|---|---|---|---|---|---|---|
 |W|       D|      M|       T|       W|       T|       F|       S|       S|       T|
-|1||00:00|00:36S|00:48W|00:36E|00:00|01:24L|00:36E|04:00|
-|2||00:00|00:43S|00:58W|00:43E|00:00|01:41L|00:43E|04:48|
-|3||00:00|00:52S|01:09W|00:52E|00:00|02:01L|00:52E|05:46|
-|4||00:00|01:02S|01:23W|01:02E|00:00|02:25L|01:02E|06:54|
+|1|08/02/2021|00:00|00:36S|00:48W|00:36E|00:00|01:24L|00:36E|04:00|
+|2|08/09/2021|00:00|00:43S|00:58W|00:43E|00:00|01:41L|00:43E|04:48|
+|3|08/16/2021|00:00|00:52S|01:09W|00:52E|00:00|02:01L|00:52E|05:46|
+|4|08/23/2021|00:00|01:02S|01:23W|01:02E|00:00|02:25L|01:02E|06:54|
 
 R = rest,
 W = workout,
@@ -87,7 +87,7 @@ F = fast finish,
 T = tempo
 
 # Roadmap
-The moon shot is to build this into an AI enabled multisport anual training plan with inputs from devices and biomarkers including heart rate, resting heart rate, pulse oxygenation, as well as daily human input, but we have to start somewhere.
+The moon shot is to build this into an AI enabled multisport annual training plan with inputs from devices and biomarkers including heart rate, resting heart rate, pulse oxygenation, etc. as well as daily human input, but we have to start somewhere.
 
 Shorter term goals include adding abilities for:
 * other sports besides running
