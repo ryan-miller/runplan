@@ -2,7 +2,9 @@
 Some number of runners follow a plan to help them best prepare for an event or goal. These plans are usually structured by logical patterns. This project aims to generate structured run plans based on simple preferences.
 
 # Getting Started
-Clone repo. 
+With Ruby installed, clone repo. 
+
+From command prompt see **Usage**.
 
 # Prerequisites
 Ruby 3
