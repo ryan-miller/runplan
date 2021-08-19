@@ -100,6 +100,7 @@ Shorter term goals include adding abilities for:
 https://github.com/ryan-miller
 
 # License
+See LICENSE (MIT)
 
 # Contact
 ryan dot l as in lima dot miller at icloud dot com
