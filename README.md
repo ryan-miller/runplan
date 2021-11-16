@@ -30,10 +30,10 @@ Many workout plans have a number of assumptions. Runplan allows for several runt
 ```...```
 
 # Output
-Runplan provides two different run plan strategies. We will refer to them as the 'Frank' strategy and the 'Roche' strategy.
+Runplan provides two different run plan strategies. We will refer to them as the 'BarryP' strategy and the 'Roche' strategy.
 
-## Frank Strategy
-The Frank strategy (which will probably change once I remember the correct name) is based off of a http://forum.slowtwitch.com member. This approach is to run six days a week. There are three short runs, 2 medium runs, and 1 long run where the medium runs are two times as long as the short runs and the long run is three times as long as the short runs. For instance, with easy math, if you run ten hours a week, you would do three 1 hour runs, two 2 hour runs, and one 3 hour run. By default, for now, the single rest day each week is on Monday.
+## BarryP Strategy
+The BarryP strategy is based off of a http://forum.slowtwitch.com member. This approach is to run six days a week. There are three short runs, 2 medium runs, and 1 long run where the medium runs are two times as long as the short runs and the long run is three times as long as the short runs. For instance, with easy math, if you run ten hours a week, you would do three 1 hour runs, two 2 hour runs, and one 3 hour run. By default, for now, the single rest day each week is on Monday.
 
 ## Roche Strategy
 The Roche strategy is from SWAP Running (www.swaprunning.com) coaches, David and Megan Roche. Their strategy is bit more complex. See below for a typical week.
@@ -53,7 +53,7 @@ Typically Fridays are rest days until a certain volume is reached. Someday a run
 # Sample output
 Running `ruby test/runplan_tester.rb` using default values results in the below output. What you choose to do with this output is up to you.
 
-|FRANK PLAN||||||||||
+|BARRYP PLAN||||||||||
 |---|---|---|---|---|---|---|---|---|---|
 |W|       D|      M|       T|       W|       T|       F|       S|       S|       T|
 |1|08/02/2021|00:00R|00:24S|00:48W|00:24E|00:48T|00:24E|01:12L|04:00|
@@ -93,7 +93,7 @@ Shorter term goals include adding abilities for:
 * other sports besides running
 * multiple workouts per day
 * a strength training component
-* other strategies besides 'Roche' and 'Frank'
+* other strategies besides 'Roche' and 'BarryP'
 * daily recommendations based on recent past performance and biomarkers
 
 # Contributing

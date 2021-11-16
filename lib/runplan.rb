@@ -155,7 +155,7 @@ class WorkoutPlan < Serializeable
 
 end
 
-class FrankWorkoutPlan < WorkoutPlan
+class BarryWorkoutPlan < WorkoutPlan
 
     def initialize(params = {})
         super(params)
